@@ -18,6 +18,10 @@ from timm.data.mixup import Mixup
 from timm.loss import LabelSmoothingCrossEntropy, SoftTargetCrossEntropy
 from timm.utils import ModelEmaV2, accuracy, get_state_dict
 
+# add avion to path
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from avion.data.classification_dataset import VideoClsDataset, multiple_samples_collate
 import avion.models.model_videomae as model_videomae
 from avion.optim.layer_decay import LayerDecayValueAssigner
@@ -31,16 +35,16 @@ from avion.utils.misc import check_loss_nan, interpolate_pos_embed
 def get_args_parser():
     parser = argparse.ArgumentParser(description='VideoMAE fine-tune', add_help=False)
     parser.add_argument('--root',
-                        default='datasets/Kinetics/train_320px/',
+                        default='/home/amir/AVION/datasets/EK100/EK100_320p_15sec_30fps_libx264/',
                         type=str, help='path to train dataset root')
-    parser.add_argument('--root-val',
-                        default='datasets/Kinetics/val_320px/',
+    parser.add_argument('--root_val',
+                        default='/home/amir/AVION/datasets/EK100/EK100_320p_15sec_30fps_libx264/',
                         type=str, help='path to val dataset root')
-    parser.add_argument('--train-metadata',
-                        default='datasets/Kinetics/annotations/k400_320p_train_list.txt',
+    parser.add_argument('--train_metadata',
+                        default='/home/amir/AVION/datasets/EK100/verb/train.csv',
                         type=str, help='metadata for train split')
-    parser.add_argument('--val-metadata',
-                        default='datasets/Kinetics/annotations/k400_val_list.txt',
+    parser.add_argument('--val_metadata',
+                        default='/home/amir/AVION/datasets/EK100/verb/val.csv',
                         type=str, help='metadata for val split')
     parser.add_argument('--output-dir', default='./', type=str, help='output dir')
     parser.add_argument('--input-size', default=224, type=int, help='input frame size')

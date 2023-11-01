@@ -12,13 +12,13 @@ from avion.data.transforms import Permute, AdaptiveTemporalCrop, SpatialCrop
 
 
 def read_metadata(metadata_fname):
-    samples = []
+    samples = [] 
     with open(metadata_fname) as split_f:
         data = split_f.readlines()
         for line in data:
             line_info = line.split(' ')
             assert len(line_info) == 3
-            samples.append((line_info[0], int(line_info[1]), int(line_info[2])))
+            samples.append((line_info[0], line_info[1], int(line_info[2])))
     return samples
 
 
